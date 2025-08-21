@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from "react";
 import ProgressBar from "@/components/ProgressBar";
 import QuestionCard from "@/components/QuestionCard";
+import ThemeToggle from "@/components/ThemeToggle";
 import { usePersistentState } from "@/lib/usePersistentState";
 import { sendTriage, startSession } from "@/lib/api";
 import { useRouter } from "next/navigation";
@@ -79,12 +80,32 @@ export default function TriagePage() {
   }
 
   return (
-    <div className="min-h-screen max-w-2xl mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold mb-2">{t('start_triage')}</h1>
-        <ProgressBar value={progress} />
-        {error && <div className="mt-2 text-sm" style={{ color: '#a61b1b' }}>{error}</div>}
+    <div className="min-h-screen relative bg-gradient-to-br from-yellow-50 via-yellow-100 to-amber-100">
+      {/* Botão de tema no canto superior direito */}
+      <div className="absolute top-6 right-6 z-20">
+        <ThemeToggle />
       </div>
+      
+      {/* Formas decorativas fluidas */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Círculo grande superior direito */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-yellow-200/20 rounded-full blur-3xl animate-pulse" />
+        
+        {/* Círculo médio inferior esquerdo */}
+        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-amber-200/15 rounded-full blur-2xl animate-pulse delay-1000" />
+      </div>
+      
+      <div className="max-w-2xl mx-auto p-6 space-y-6 relative z-10">
+        <div className="text-center">
+          <h1 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-800 font-poppins animate-fade-in-up">
+            {t('start_triage')}
+          </h1>
+          <p className="text-lg text-gray-600 mb-6 font-inter">
+            Vamos conhecer você melhor para personalizar sua experiência
+          </p>
+          <ProgressBar value={progress} />
+          {error && <div className="mt-4 text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg border border-red-200">{error}</div>}
+        </div>
 
       {step === 1 && (
         <QuestionCard title={t('feeling_today')}> 
@@ -112,8 +133,8 @@ export default function TriagePage() {
               onChange={e => setAnswers({ ...answers, feelingOtherText: e.target.value })}
               onKeyDown={(e) => { if (e.key === 'Enter' && (answers.feelingOtherText || '').trim()) goNextNow(); }}
               placeholder={t('feeling_other_placeholder')}
-              className="mt-3 w-full px-3 py-2 rounded border bg-transparent"
-              style={{ borderColor: 'var(--border-color)', color: 'var(--foreground)' }}
+              className="mt-3 w-full px-4 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all duration-200"
+              style={{ borderColor: '#FCD34D' }}
             />
           )}
           <div className="flex justify-between mt-6">
@@ -135,12 +156,12 @@ export default function TriagePage() {
               onChange={e => setAnswers({ ...answers, therapyDuration: e.target.value })}
               onKeyDown={(e) => { if (e.key === 'Enter' && (answers.therapyDuration || '').trim()) goNextNow(); }}
               placeholder={t('therapy_duration_placeholder')}
-              className="mt-3 w-full px-3 py-2 rounded border bg-transparent"
-              style={{ borderColor: 'var(--border-color)', color: 'var(--foreground)' }}
+              className="mt-3 w-full px-4 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all duration-200"
+              style={{ borderColor: '#FCD34D' }}
             />
           )}
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -174,12 +195,12 @@ export default function TriagePage() {
               onChange={e => setAnswers({ ...answers, reasonsOtherText: e.target.value })}
               onKeyDown={(e) => { if (e.key === 'Enter' && (answers.reasonsOtherText || '').trim()) goNextNow(); }}
               placeholder={t('reasons_other_placeholder')}
-              className="mt-3 w-full px-3 py-2 rounded border bg-transparent"
-              style={{ borderColor: 'var(--border-color)', color: 'var(--foreground)' }}
+              className="mt-3 w-full px-4 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all duration-200"
+              style={{ borderColor: '#FCD34D' }}
             />
           )}
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -197,12 +218,12 @@ export default function TriagePage() {
               onChange={e => setAnswers({ ...answers, medsWhich: e.target.value })}
               onKeyDown={(e) => { if (e.key === 'Enter' && (answers.medsWhich || '').trim()) goNextNow(); }}
               placeholder={t('which_meds_placeholder')}
-              className="mt-3 w-full px-3 py-2 rounded border bg-transparent"
-              style={{ borderColor: 'var(--border-color)', color: 'var(--foreground)' }}
+              className="mt-3 w-full px-4 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all duration-200"
+              style={{ borderColor: '#FCD34D' }}
             />
           )}
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -215,12 +236,17 @@ export default function TriagePage() {
             <OptionPill active={!answers.selfHarmThoughts} onClick={() => { setAnswers({ ...answers, selfHarmThoughts: false }); setTimeout(() => goNextNow(), 400); }}>{t('no')}</OptionPill>
           </div>
           {answers.selfHarmThoughts && (
-            <div className="mt-3 text-sm" style={{ color: '#a61b1b' }}>
-              {t('self_harm_message')}
+            <div className="mt-4 p-4 text-sm bg-red-50 border border-red-200 rounded-xl text-red-700">
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                {t('self_harm_message')}
+              </div>
             </div>
           )}
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -234,7 +260,7 @@ export default function TriagePage() {
             ))}
           </div>
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton disabled={!canGoNext(6)} onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -247,7 +273,7 @@ export default function TriagePage() {
             <OptionPill active={!answers.hasSomeoneToTalk} onClick={() => { setAnswers({ ...answers, hasSomeoneToTalk: false }); goNextNow(); }}>{t('no')}</OptionPill>
           </div>
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton onClick={next}>{t('next')}</TriageButton>
           </div>
         </QuestionCard>
@@ -255,13 +281,23 @@ export default function TriagePage() {
 
       {step === 8 && (
         <QuestionCard title={t('age')}>
-          <input type="number" min={1} max={120} value={answers.age ?? ''} onChange={e => setAnswers({ ...answers, age: e.target.value ? Number(e.target.value) : undefined })} placeholder={t('age_placeholder')} className="w-full px-3 py-2 rounded border bg-transparent" style={{ borderColor: 'var(--border-color)', color: 'var(--foreground)' }} />
+          <input 
+            type="number" 
+            min={1} 
+            max={120} 
+            value={answers.age ?? ''} 
+            onChange={e => setAnswers({ ...answers, age: e.target.value ? Number(e.target.value) : undefined })} 
+            placeholder={t('age_placeholder')} 
+            className="w-full px-4 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all duration-200" 
+            style={{ borderColor: '#FCD34D' }} 
+          />
           <div className="flex justify-between mt-6">
-            <button onClick={back} className="px-4 py-2 rounded border" style={{ borderColor: 'var(--border-color)' }}>{t('back')}</button>
+            <button onClick={back} className="px-6 py-3 rounded-xl border-2 bg-white/80 backdrop-blur-sm text-gray-700 hover:bg-amber-50 hover:border-amber-400 transition-all duration-200 font-medium" style={{ borderColor: '#FCD34D' }}>{t('back')}</button>
             <TriageButton disabled={loading || !(typeof answers.age === 'number' && Number.isInteger(answers.age) && answers.age >= 1 && answers.age <= 120)} onClick={finish}>{t('finish')}</TriageButton>
           </div>
         </QuestionCard>
       )}
+      </div>
     </div>
   );
 } 

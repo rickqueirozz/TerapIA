@@ -7,20 +7,24 @@ type TriageButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export default function TriageButton({ variant = "cta", className = "", style, ...props }: TriageButtonProps) {
   const base: React.CSSProperties = variant === "cta"
-    ? { background: 'var(--cta)', color: '#4B4B4B', border: '1px solid var(--border-color)' }
-    : { background: 'var(--background-secondary)', color: 'var(--foreground)', border: '1px solid var(--border-color)' };
+    ? { 
+        background: 'linear-gradient(135deg, #F59E0B, #FCD34D)', 
+        color: 'white', 
+        border: '2px solid #F59E0B',
+        boxShadow: '0 4px 12px rgba(245, 158, 11, 0.3)'
+      }
+    : { 
+        background: 'rgba(255, 255, 255, 0.9)', 
+        color: '#4B5563', 
+        border: '2px solid #FCD34D',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+      };
 
   return (
     <button
       {...props}
-      className={`px-4 py-2 rounded font-medium transition-colors duration-300 ${className}`}
+      className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 active:scale-95 font-poppins ${className}`}
       style={{ ...base, ...style }}
-      onMouseEnter={(e) => {
-        if (variant === 'cta') (e.currentTarget as HTMLButtonElement).style.background = '#FFD966';
-      }}
-      onMouseLeave={(e) => {
-        if (variant === 'cta') (e.currentTarget as HTMLButtonElement).style.background = 'var(--cta)';
-      }}
     />
   );
 } 

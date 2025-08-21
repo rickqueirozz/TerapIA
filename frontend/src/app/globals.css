@@ -1,42 +1,117 @@
 @import "tailwindcss";
 
 :root {
-  /* Paleta */
-  --background: #BFD8EB; /* fundo principal */
-  --background-secondary: #CFE4F3; /* fundo secundário/caixas */
-  --border-color: #9BB3C9; /* bordas e divisórias */
-  --foreground: #4B4B4B; /* texto principal */
-  --cta: #FFE58F; /* botões/destaques */
-  --gradient: linear-gradient(135deg, #BFD8EB 0%, #CFE4F3 100%);
-  /* Aliases para compatibilidade */
-  --primary: var(--cta);
+  --background: #ffffff;
+  --foreground: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* Modo escuro mantém contraste adequado (ajustes leves) */
-.dark {
-  --background: #9fbdd3;
-  --background-secondary: #b0cbe0;
-  --border-color: #7f9bb1;
-  --foreground: #ececec;
-  --cta: #FFE58F;
-  --gradient: linear-gradient(135deg, #9fbdd3 0%, #b0cbe0 100%);
+[data-theme="dark"] {
+  --background: #111827;
+  --foreground: #f9fafb;
+  --muted: #9ca3af;
+  --border: #374151;
 }
 
 body {
-  background: var(--gradient);
+  background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Fade-in suave */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Estilos para noscript */
+noscript {
+  display: block;
 }
-.fade-in { animation: fadeIn 480ms ease-out both; }
+
+/* Animação para o brilho do sol */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+/* Animação de flutuação para a ilustração */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Animações de entrada para os elementos */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classes de animação */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+/* Delays para animações em sequência */
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-delay-500 {
+  animation-delay: 500ms;
+}

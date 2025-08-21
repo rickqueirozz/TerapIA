@@ -10,16 +10,14 @@ type QuestionCardProps = {
 export default function QuestionCard({ title, children, footer }: QuestionCardProps) {
   return (
     <div
-      className="w-full rounded-2xl p-6 shadow"
+      className="w-full rounded-3xl p-8 shadow-lg transition-all duration-300 bg-white/90 backdrop-blur-sm border-2"
       style={{
-        border: `1px solid var(--border-color)`,
-        background: 'var(--background-secondary)',
-        color: 'var(--foreground)',
-        borderRadius: 16,
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+        borderColor: '#FCD34D',
+        borderRadius: 24,
+        boxShadow: '0 8px 32px rgba(251, 191, 36, 0.15)'
       }}
     >
-      <h2 className="text-xl font-semibold mb-4">{title}</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 font-poppins">{title}</h2>
       <div className="space-y-4">{children}</div>
       {footer && <div className="mt-6 flex justify-between items-center">{footer}</div>}
     </div>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import ChatMessage from "@/components/ChatMessage";
+import ThemeToggle from "@/components/ThemeToggle";
 import { endSession, sendChatMessage, startSession } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 
@@ -59,9 +60,15 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen max-w-3xl mx-auto p-6 flex flex-col gap-4">
-      <div className="flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">{t('chat_with_ai')}</h1>
+    <div className="min-h-screen relative" style={{ backgroundColor: "var(--background)" }}>
+      {/* Botão de tema no canto superior direito */}
+      <div className="absolute top-6 right-6 z-10">
+        <ThemeToggle />
+      </div>
+      
+      <div className="max-w-3xl mx-auto p-6 flex flex-col gap-4 min-h-screen">
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>{t('chat_with_ai')}</h1>
         <div className="flex gap-2">
           {!active ? (
             <button onClick={onStart} className="px-4 py-2 rounded font-medium" style={{ background: 'var(--cta)', color: '#4B4B4B', border: `1px solid var(--border-color)` }}>{t('start_conversation')}</button>
@@ -88,6 +95,7 @@ export default function ChatPage() {
           className="flex-1 px-4 py-3 rounded-xl border bg-transparent"
         />
         <button onClick={onSend} disabled={!active} className="px-4 py-3 rounded-xl disabled:opacity-60" style={{ background: 'var(--cta)', color: '#4B4B4B', border: `1px solid var(--border-color)` }}>{t('send')}</button>
+      </div>
       </div>
     </div>
   );

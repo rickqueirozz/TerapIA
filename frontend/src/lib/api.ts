@@ -1,13 +1,13 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000';
+import type { TriageAnswers } from "@/types/triage";
 
 export async function startSession(): Promise<{ sessionId: string }> {
-  const res = await fetch(`${API_BASE}/api/session/start`, { method: 'POST' });
+  const res = await fetch('/api/session/start', { method: 'POST' });
   if (!res.ok) throw new Error('Falha ao iniciar sessão');
   return res.json();
 }
 
 export async function endSession(sessionId: string): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/session/end`, {
+  const res = await fetch('/api/session/end', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ sessionId })
@@ -15,10 +15,8 @@ export async function endSession(sessionId: string): Promise<void> {
   if (!res.ok) throw new Error('Falha ao encerrar sessão');
 }
 
-import type { TriageAnswers } from "@/types/triage";
-
 export async function sendTriage(sessionId: string, answers: TriageAnswers): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/triage`, {
+  const res = await fetch('/api/triage', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ sessionId, answers })
@@ -27,7 +25,7 @@ export async function sendTriage(sessionId: string, answers: TriageAnswers): Pro
 }
 
 export async function sendChatMessage(sessionId: string, message: string): Promise<{ reply: string }> {
-  const res = await fetch(`${API_BASE}/api/chat`, {
+  const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ sessionId, message })
